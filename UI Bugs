@@ -1,0 +1,67 @@
+Pre Requisites:
+
+Navigate to https://wmxrwq14uc.execute-api.us-east-1.amazonaws.com/Prod/Account/Login and access with User and Password given.	
+
+1. First and Last name get swapped every time (happens with names, numbers and signs)
+
+Repro Steps
+
+- Click on Add Employee Orange Button
+- Fill all neccesary info in Add Modal
+- Click on Add Button
+
+2. Employees shows in table with no order (alphabetical, dependant number, or moment added)
+
+Repro Steps
+
+- Click on Add Employee Orange Button
+- Fill all neccesary info in Add Modal
+- Click on Add Button
+
+3. First and Last name accept all type of characters even no letters at all
+
+Repro Steps
+
+- Click on Add Employee Orange Button
+- Fill all neccesary info in Add Modal using numbers or signs
+- Click on Add Button
+
+	4. When adding new employee the Add Button appears activate it ven if we don't input any info on the text boxes
+
+Repro Steps
+
+- Click on Add Employee Orange Button
+
+5. When Click on Add button with no correct info doesn't show Error Message
+
+Repro Steps
+
+- Click on Add Employee Orange Button
+- Don't type any info in Add Modal
+- Click on Add Button
+
+6. When reaching limit of 33 dependts system doesn't show error/limit message
+
+Repro Steps
+
+- Click on Add Employee Orange Button
+- Fill all neccesary info in Add Modal and make sure to add a dependant number above of 32
+- Click on Add Button
+
+7. Text boxes doesn't show error message when reaching text limit of 51 characters or more
+
+Repro Steps
+
+- Click on Add Employee Orange Button
+- Fill all neccesary info in Add Modal making sure to use 51 characters or more 
+- Click on Add Button
+
+8. UI displays un evenly when adding large names and right line of the table doesn't accomodates properly
+
+Repro Steps
+
+- Click on Add Employee Orange Button
+- Fill all neccesary info in Add Modal making sure to use 51 characters or more 
+- Click on Add Button
+
+PUT Endpoint Works in UI but Returns 405 in API
