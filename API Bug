@@ -1,0 +1,18 @@
+PUT Endpoint Works in UI but Returns 405 in API 
+
+Description: 
+When trying to update an existing employee using PUT `/api/Employees/{id}`, the API returns `405 Method Not Allowed`. However, the same action works from the UI.
+
+Repro Steps
+ 
+1. Create a new employee via POST `/api/Employees`  
+2. Copy the employee `id` from the response  
+3. Send a PUT request to `/api/Employees/{id}` with a valid body:  
+```json
+{
+  "firstName": "John",
+  "lastName": "Doe",
+  "username": "john.doe",
+  "dependants": 2,
+  "salary": 50000
+}
