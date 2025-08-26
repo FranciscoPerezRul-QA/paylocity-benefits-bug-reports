@@ -1,0 +1,40 @@
+// tests/api-employees.spec.js
+import { test, expect } from '@playwright/test';
+
+const AUTH_HEADER = {
+  Authorization: 'Basic <yourAuthToken>' // 
+};
+
+test.describe('API Employees CRUD', () => {
+  test('Create → Get → Delete employee', async ({ request }) => {
+    // Create Employee
+    const newEmployee = {
+      username: `auto.${Date.now()}`,
+      firstName: "QA",
+      lastName: "Automation",
+      dependants: 2,
+      salary: 52000
+    };
+
+    const createRes = await request.post(`/api/Employees`, {
+      headers: AUTH_HEADER,
+      data: newEmployee
+    });
+    expect(createRes.ok()).toBeTruthy();
+    const created = await createRes.json();
+
+    // Fetch Employee
+    const getRes = await request.get(`/api/Employees/${created.id}`, {
+      headers: AUTH_HEADER
+    });
+    expect(getRes.ok()).toBeTruthy();
+    const fetched = await getRes.json();
+    expect(fetched.firstName).toBe("QA");
+
+    // Delete Employee
+    const delRes = await request.delete(`/api/Employees/${created.id}`, {
+      headers: AUTH_HEADER
+    });
+    expect(delRes.ok()).toBeTruthy();
+  });
+});
