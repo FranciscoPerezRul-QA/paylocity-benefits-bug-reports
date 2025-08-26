@@ -1,0 +1,48 @@
+{
+  "name": "paylocity-qa-challenge",
+  "version": "1.0.0",
+  "scripts": {
+    "test": "playwright test"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.38.0"
+  }
+}
+
+// playwright.config.js
+import { defineConfig } from '@playwright/test';
+
+export default defineConfig({
+  use: {
+    headless: true,   
+    screenshot: 'only-on-failure',
+    video: 'retain-on-failure',
+    baseURL: 'https://wmxrwq14uc.execute-api.us-east-1.amazonaws.com/Prod'
+  },
+  reporter: [['list'], ['html', { outputFolder: 'playwright-report' }]]
+});
+
+// tests/login.spec.js
+import { test, expect } from '@playwright/test';
+
+test.describe('UI Login Test – Paylocity Benefits Dashboard', () => {
+  test('User can log in successfully', async ({ page }) => {
+    await page.goto('/Account/Login');
+
+    // Validate Login
+    await expect(page.locator('text=Paylocity')).toBeVisible();
+
+    // Credentials
+    await page.fill('input[name="username"]', 'TestUser782');
+    await page.fill('input[name="password"]', ";Y'LDdxm)C9r");
+
+    // Click login
+    await page.click('button:has-text("Log In")');
+
+    // Verify page navigates accordingly
+    await page.waitForLoadState('networkidle');
+    await expect(page).not.toHaveURL(/.*Account\/Login/);
+
+    await expect(page.locator('text=Benefits')).toBeVisible();
+  });
+});
